@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg-primary: #FAF8F5;
+  --color-bg-alt: #F5F0E8;
+  --color-text-primary: #2D2A26;
+  --color-text-secondary: #6B6560;
+  --color-accent-primary: #3B2F2A;
+  --color-accent-secondary: #C4956A;
+  --color-code: #5A8A8A;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+}
+
+.font-serif {
+  font-family: 'Fraunces', serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Grain texture overlay */
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Link underline animation */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent-primary);
+  transition: width 0.3s ease-out;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(45, 42, 38, 0.12);
+}
+
+/* Project image zoom */
+.project-image-wrapper {
+  overflow: hidden;
+}
+
+.project-image-wrapper img {
+  transition: transform 0.4s ease-out;
+}
+
+.project-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* Scroll indicator bounce */
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+/* Timeline styles */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-accent-secondary), var(--color-text-secondary));
+  transform: translateX(-50%);
+}
+
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 20px;
+  }
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg-primary);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
