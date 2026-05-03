@@ -33,7 +33,7 @@ export default function Hero({ isLoaded }: HeroProps) {
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          Frontend Developer & WordPress Artisan
+          Full-Stack Wordpress Developer
         </p>
 
         {/* Tagline */}
@@ -42,7 +42,7 @@ export default function Hero({ isLoaded }: HeroProps) {
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          I build websites that feel as good as they look.
+          I build websites, themes and plugins that feel as good as they look.
         </p>
 
         {/* CTAs */}
